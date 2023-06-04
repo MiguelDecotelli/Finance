@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+List of all Stocks
+{% endblock %}
+
+{% block main %}
+<h1>List of Stocks</h1>
+<form method="post">
+    {{form.hidden_tag()}}
+    {{form.symbol_search(class="form-control mx-auto w-auto mb-3")}}
+    {{form.submit(class="btn btn-color") }}
+</form>
+
+{% if no_company %}
+<h3>No Company found!</h3>
+{% else %}
+{% if list_of_shares %}
+<div class="container tables">
+    <table class="table table-striped">
+        <thead class="stocks-thead">
+            <tr>
+                <th class="symbol-column">Symbol</th>
+                <th class="company-name-column">Company Name</th>
+                <th class="industry-column">Industry</th>
+                <th class="market-cap-column">Market Cap</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for share in list_of_shares %}
+            <tr class="{{'even' if loop.index % 2 == 0 else 'odd'}}">
+                <td>{{ share.symbol }}</td>
+                <td>{{ share.company_name}}</td>
+                <td>{{ share.industry }}</td>
+                <td>{{ share.market_cap}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    {% endif %}
+</div>
+
+{% endblock %}

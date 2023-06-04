@@ -1,0 +1,79 @@
+def index():
+"""Show portfolio of stocks"""
+user_id = session["user_id"]
+
+# Query of Stocks and shares
+my_shares = db.execute(
+"SELECT symbol, name, SUM(shares) as sum_shares, price, total FROM portfolio JOIN transactions ON portfolio.id =
+transactions.stock_id WHERE user_id = ? GROUP BY name ORDER BY symbol", user_id)
+
+# Creating a temporary list
+shares_list = []
+
+# Setting up updated price by calling lookup
+for i in range(len(my_shares)):
+current_price = lookup(my_shares[i]["symbol"])
+current_price = current_price["price"]
+
+# Setting updated total based on current price
+total = current_price * int(my_shares[i]["sum_shares"])
+print(f'total: {total}')
+
+# Creating a dictionary for updated prices
+new_dictionary = {
+"symbol": my_shares[i]["symbol"],
+"name": my_shares[i]["name"],
+"shares": my_shares[i]["sum_shares"],
+"price": current_price,
+"total": total
+}
+
+# Attaching the content of new_dictionary into my list
+shares_list.append(new_dictionary)
+
+print(f' new dict: {new_dictionary["symbol"]}')
+bought = new_dictionary["shares"] * new_dictionary["price"]
+print(f' bought {bought}')
+
+# Checking avaiable cash and total cash from purchase and sell of shares
+avaiable_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
+print(f' avaiable cash: {avaiable_cash}')
+shares_bought = db.execute(
+"SELECT SUM(total) FROM transactions WHERE stock_id IN (SELECT id FROM portfolio WHERE shares > 0) AND user_id = ?",
+user_id)[0]["SUM(total)"]
+print(f' shares bought: {shares_bought}')
+shares_sold = db.execute(
+"SELECT SUM(total) FROM transactions WHERE stock_id IN (SELECT id FROM portfolio WHERE shares < 0) AND user_id=?",
+    user_id)[0]["SUM(total)"] print(f' shares sold: {shares_sold}') # New users have None shares_bought if
+    shares_bought==None: total_cash=avaiable_cash # Ensure user has already sold any shares elif shares_sold==None:
+    total_cash=avaiable_cash + shares_bought # Add balances to get total amount of cash and render it into template with
+    all future (current) acquired and sold shares else: total_cash=avaiable_cash + shares_bought - shares_sold return
+    render_template("index.html", shares_list=shares_list, avaiable_cash=avaiable_cash, total_cash=total_cash)
+    @app.route("/sell", methods=["GET", "POST" ]) @login_required def sell(): """Sell shares of stock"""
+    user_id=session["user_id"] # How much cash the user still have
+    cash=db.execute( "SELECT cash FROM users WHERE id = ?" , user_id)[0]["cash"] # Query the stock's symbols user have
+    acquired
+    my_stocks=db.execute( "SELECT symbol, shares FROM portfolio WHERE id IN (SELECT stock_id FROM transactions WHERE user_id = ?) AND shares > 0 GROUP BY symbol"
+    , user_id) print(f' shares: {my_stocks}') if request.method=="POST" : # Call lookup for valid symbols
+    ticker=lookup(request.form.get("symbol")) # Ensure Symbol was submitted if not request.form.get("symbol"): return
+    apology("Missing symbol", 400) # Requesting the number of shares and check if it is an integer try:
+    shares=int(request.form.get("shares")) except: return apology("Must be integer", 400) # Query the total number of
+    shares from a particular stock the user has my_shares=db.execute("SELECT shares FROM portfolio WHERE symbol=?",
+    ticker["symbol"])[0]["shares"] # Ensure user has enough shares if shares> my_shares:
+    return apology("Not enough shares", 400)
+
+    # Ensure it is a positive number
+    elif shares <= 0: return apology("Must be positive number", 400) # Update tables with new amount of shares, stocks
+        and avaiable cash user has after sell else: my_sell=db.execute("INSERT INTO portfolio (symbol, name, shares)
+        VALUES (?, ?, ?)", ticker["symbol"], ticker["name"], (-1 * shares)) db.execute("INSERT INTO transactions
+        (stock_id, time, price, total, user_id) VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?)", my_sell, ticker["price"],
+        (ticker["price"] * shares), user_id) current_sell=ticker["price"] * float(shares) db.execute("UPDATE users SET
+        cash=? WHERE id=?", cash + current_sell, user_id) flash("Sold!") # Redirect to home page return redirect("/")
+        return render_template("sell.html", my_stocks=my_stocks) # db.execute("INSERT INTO transactions (stock_id, time,
+        price, total, user_id) VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?)", my_stocks, ticker["price"],
+        (ticker["price"]*shares), user_id) my_sell=db.execute("INSERT INTO portfolio (symbol, name, shares) VALUES (?,
+        ?, ?)", ticker["symbol"], ticker["name"], (-1 * shares)) db.execute("INSERT INTO transactions (stock_id, time,
+        price, total, user_id) VALUES (?, CURRENT_TIMESTAMP, ?, ?, ?)", my_sell, ticker["price"], (ticker["price"] *
+        shares), user_id) current_sell=ticker["price"] * float(shares) db.execute("UPDATE users SET cash=? WHERE id=?",
+        cash + current_sell, user_id) return render_template("sell.html", my_stocks=my_stocks) @app.route("/")
+        @login_required def index(): """Show portfolio of stocks""" return render_template("index.html")

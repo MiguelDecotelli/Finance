@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block main %}
+<form method="post">
+    {{form.hidden_tag()}}
+    {{ form.username(class="form-control mx-auto w-auto mb-3")}}
+    {{ form.password(class="form-control mx-auto w-auto mb-3")}}
+    {{ form.pass_confirm(class="form-control mx-auto w-auto mb-3")}}
+    {{ form.submit(class="btn btn-color") }}
+</form>
+{% endblock %}

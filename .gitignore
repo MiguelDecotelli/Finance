@@ -1,0 +1,5 @@
+APY_KEY.txt
+sell.py
+__pycache__/*
+finance/__pycache__/*
+migrations/*

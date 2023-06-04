@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+History
+{% endblock %}
+
+{% block main %}
+
+<h1>History</h1>
+<div class="container tables">
+    <table class="table table-striped">
+        <thead class="history-thead">
+            <tr>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th>Transacted</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for column in transactions %}
+            <tr class="{{'even' if loop.index % 2 == 0 else 'odd'}}">
+                <td>{{column.symbol}}</td>
+                <td>{{column.shares}}</td>
+                <td>{{column.price | usd}}</td>
+                <td>{{column.transaction_type}}</td>
+                <td>{{column.transaction_time.strftime('%Y/%m/%d, %H:%M:%S')}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

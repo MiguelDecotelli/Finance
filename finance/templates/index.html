@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Portfolio
+{% endblock %}
+
+{% block main %}
+<h1>Portfolio</h1>
+<div class="container tables">
+    <table class="table table-striped">
+        <thead class="portfolio-thead">
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for share in portfolio %}
+            <tr class="{{'even' if loop.index % 2 == 0 else 'odd'}}">
+                <td>{{ share.symbol }}</td>
+                <td>{{ share.name }}</td>
+                <td>{{ share.shares }}</td>
+                <td>{{ share.price | usd }}</td>
+                <td>{{ share.total | usd }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr class="portfolio-tfoot">
+                <td id="cash-td" colspan="4">Cash</td>
+                <td style="color: black; font-weight: bolder;">{{ cash | usd }}</td>
+            </tr>
+            <tr class="portfolio-tfoot">
+                <td id="total-cash-td" colspan="4">TOTAL</td>
+                <td style="color: forestgreen; font-weight: bolder;">{{ total_cash | usd}}</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Add Some Cash
+{% endblock %}
+
+{% block main %}
+<h1>Add Cash</h1>
+
+<form method="post">
+    {{form.hidden_tag()}}
+    {{form.add_cash(class="form-control mx-auto w-auto mb-3")}}
+    {{form.add_card(class="form-control mx-auto w-auto mb-3")}}
+    {{form.password(class="form-control mx-auto w-auto mb-3")}}
+    {{form.submit(class="btn btn-color")}}
+</form>
+{% endblock %}

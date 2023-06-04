@@ -1,0 +1,208 @@
+body {
+    background-color: gainsboro;
+}
+
+nav .navbar-brand {
+    font-size: xx-large;
+}
+
+nav span {
+    color: royalblue;
+}
+
+nav li {
+    margin: 0 .125rem 0 .25rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: ivory;
+}
+
+nav button {
+    cursor: pointer;
+}
+
+footer a {
+    text-decoration: none;
+    color: darkgoldenrod;
+}
+
+h1 {
+    color: royalblue;
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    color: royalblue;
+}
+
+p {
+    color: royalblue;
+}
+
+.btn-color {
+    color: white;
+    background-color: #212529;
+    margin-bottom: 1.5rem;
+}
+
+.tables {
+    border: solid .5rem black;
+    width: 80%;
+}
+
+.portfolio-tfoot {
+    margin: auto;
+}
+
+#cash-td {
+    color: black;
+    font-weight: bolder;
+    text-align: end;
+    padding-right: 3.8rem;
+}
+
+#total-cash-td {
+    color: forestgreen;
+    font-weight: bolder;
+    text-align: end;
+    padding-right: 3.7rem;
+}
+
+#total {
+    color: forestgreen;
+    font-weight: bolder;
+}
+
+tr.even {
+    font-size: .90rem;
+    color: black;
+}
+
+tr.odd {
+    font-size: .90rem;
+    opacity: 1;
+    background-color: silver;
+}
+
+.symbol-column {
+    width: 8%;
+    text-align: center;
+}
+
+
+.company-name-column {
+    width: 38.5%;
+}
+
+.industry-column {
+    width: 38.5%;
+}
+
+.market-cap-column {
+    width: 15%;
+}
+
+@media screen and (max-width: 975px) {
+    nav li {
+        margin: .25rem;
+    }
+
+    nav li>a>span {
+        display: none;
+    }
+
+    .tables {
+        border: solid .35rem black;
+        width: 95%;
+    }
+
+    .stocks-thead {
+        font-size: .7rem;
+    }
+
+    .history-thead {
+        font-size: .8rem;
+    }
+
+}
+
+@media screen and (min-width: 575px) and (max-width:974px) {
+
+    h1 {
+        font-size: xx-large;
+    }
+
+    .portfolio-thead {
+        font-size: .9rem;
+    }
+
+    .portfolio-tfoot {
+        font-size: .85rem;
+    }
+
+    #cash-td {
+        padding-right: 1.9rem;
+    }
+
+    #total-cash-td {
+        padding-right: 1.9rem;
+    }
+
+
+    .stocks-thead {
+        font-size: .9rem;
+    }
+
+    tr.even {
+        font-size: .85rem;
+    }
+
+    tr.odd {
+        font-size: .85rem;
+    }
+
+}
+
+@media screen and (min-width: 345px) and (max-width: 574px) {
+
+    h1 {
+        font-size: x-large;
+    }
+
+    .tables {
+        border: solid .25rem black;
+        width: 98%;
+    }
+
+    .portfolio-thead {
+        font-size: .75rem;
+    }
+
+    .portfolio-tfoot {
+        font-size: .7rem;
+    }
+
+    #cash-td {
+        padding-right: 1.3rem;
+    }
+
+    #total-cash-td {
+        padding-right: 1.3rem;
+    }
+
+
+    .stocks-thead {
+        font-size: .6rem;
+    }
+
+    tr.even {
+        font-size: .6rem;
+    }
+
+    tr.odd {
+        font-size: .6rem;
+    }
+
+}
