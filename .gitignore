@@ -3,5 +3,7 @@ sell.py
 __pycache__/*
 my_shares/__pycache__/*
 migrations/*
+
+# Important!
 credentials.json
 
