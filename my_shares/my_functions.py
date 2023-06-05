@@ -1,4 +1,4 @@
-import os
+from config_json import API_KEY
 import requests
 import urllib.parse
 from flask import render_template
@@ -12,7 +12,7 @@ def lookup(symbol):
     """Look up quote for symbol."""
     # Contact API
     try:
-        api_key = os.environ.get("API_KEY")
+        api_key = API_KEY
         url = f"https://cloud.iexapis.com/stable/stock/{urllib.parse.quote_plus(symbol)}/quote?token={api_key}"
         response = requests.get(url)
         response.raise_for_status()
