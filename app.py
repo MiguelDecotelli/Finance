@@ -194,20 +194,25 @@ def index():
 
     # Updating prices and calculating totals for each share
     for share in my_portfolio:
-        current_price = lookup(share.symbol)["price"]
-        total = current_price * int(share.shares)
+        
+        share_info = lookup(share.symbol)
+        if share_info is not None:
+            current_price = lookup(share.symbol)["price"]
+            total = current_price * int(share.shares)
 
-        # Creating a dictionary with updated share information
-        updated_share = {
-            "symbol": share.symbol,
-            "name": share.name,
-            "shares": share.shares,
-            "price": current_price,
-            "total": total
-        }
+            # Creating a dictionary with updated share information
+            updated_share = {
+                "symbol": share.symbol,
+                "name": share.name,
+                "shares": share.shares,
+                "price": current_price,
+                "total": total
+            }
 
-        # Appending the updated share to the list
-        portfolio.append(updated_share)
+            # Appending the updated share to the list
+            portfolio.append(updated_share)
+        else:
+            portfolio = []
 
     cash = current_user.cash
     total_cash = cash + sum(entry["total"] for entry in portfolio)
