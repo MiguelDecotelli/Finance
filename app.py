@@ -194,7 +194,7 @@ def index():
 
     # Updating prices and calculating totals for each share
     for share in my_portfolio:
-        
+
         share_info = lookup(share.symbol)
         if share_info is not None:
             current_price = lookup(share.symbol)["price"]
@@ -289,7 +289,8 @@ def sell():
 @login_required
 def history():
     """Show history of transactions"""
-    transactions = Portfolio.query.all()
+    transactions = Portfolio.query.filter_by(
+        user_id=current_user.id).all()
 
     return render_template("history.html", transactions=transactions)
 
@@ -316,8 +317,8 @@ def list_of_stocks():
                                            "industry": row["Industry"], "market_cap": row["Market Cap"]})
 
         if not list_of_shares:
-            no_company = True           
-    
+            no_company = True
+
     return render_template("list_of_stocks.html", form=form,  list_of_shares=list_of_shares, no_company=no_company)
 
 
