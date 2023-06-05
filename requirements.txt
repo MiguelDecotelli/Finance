@@ -1,7 +1,17 @@
+alembic
 Flask
 Flask-Session
 Flask-Login
 Flask-Migrate
+Flask-Session
+Flask-SQLAlchemy
+Flask-WTF
+itsdangerous
 gunicorn
+Jinja2
 psycopg2-binary
+SQLAlchemy
+SQLAlchemy-Utils
 requests
+Werkzeug
+WTForms
