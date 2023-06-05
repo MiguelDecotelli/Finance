@@ -1,6 +1,6 @@
 APY_KEY.txt
 sell.py
 __pycache__/*
-finance/__pycache__/*
+my_shares/__pycache__/*
 migrations/*
 credentials.json

@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, IntegerField, FloatField
 from wtforms.validators import DataRequired, EqualTo
-from finance.models import User
-from finance.my_functions import apology
+from my_shares.models import User
+from my_shares.my_functions import apology
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()], render_kw={"placeholder":"Username", "autocomplete": False})

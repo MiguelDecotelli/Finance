@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from finance import login_manager, db
+from my_shares import login_manager, db
 
 @login_manager.user_loader
 def load_user(user_id):

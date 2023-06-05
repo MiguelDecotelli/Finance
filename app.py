@@ -2,11 +2,11 @@ from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, login_required, logout_user
 from config_json import API_KEY
 from sqlalchemy import func
-from finance import app, db
-from finance.credit_card import check_credit_card
-from finance.forms import *
-from finance.models import User, Portfolio
-from finance.my_functions import apology, lookup, usd
+from my_shares import app, db
+from my_shares.credit_card import check_credit_card
+from my_shares.forms import *
+from my_shares.models import User, Portfolio
+from my_shares.my_functions import apology, lookup, usd
 from werkzeug.security import check_password_hash, generate_password_hash
 
 app.config["TEMPLATES_AUTO_RELOAD"] = True

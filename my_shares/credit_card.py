@@ -1,6 +1,5 @@
 import math
 from flask import flash, render_template
-from finance.my_functions import apology
 
 """ CREDIT CARD """
 def check_credit_card(card):
