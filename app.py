@@ -1,7 +1,6 @@
-import os
-import configparser
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, login_required, logout_user
+from config_json import API_KEY
 from sqlalchemy import func
 from finance import app, db
 from finance.credit_card import check_credit_card
@@ -14,7 +13,7 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 app.jinja_env.filters["usd"] = usd
 
-if not os.environ.get("API_KEY"):
+if not API_KEY:
     raise RuntimeError("API_KEY not set")
 
 
@@ -63,7 +62,7 @@ def login():
             return apology("Invalid username or password", 403)
 
         login_user(user)
-        flash('Welcome!')
+        flash(f'Welcome, {user.username}!')
 
         return redirect(url_for("index"))
 
@@ -344,4 +343,4 @@ def add_cash():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

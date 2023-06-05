@@ -5,10 +5,15 @@ Sell
 {% endblock %}
 
 {% block main %}
+<h1>Sell</h1>
+{% if portfolio %}
 <form method="post">
     {{form.hidden_tag()}}
     {{form.symbol(class="form-select mx-auto w-auto mb-3")}}
     {{form.shares(class="form-control mx-auto w-auto mb-3")}}
     {{form.submit(class="btn btn-color")}}
 </form>
+{% else %}
+<h4>You have nothing to Sell.</h4>
+{% endif %}
 {% endblock %}

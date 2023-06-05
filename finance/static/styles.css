@@ -11,7 +11,7 @@ nav span {
 }
 
 nav li {
-    margin: 0 .125rem 0 .25rem;
+    margin: 0 .175rem 0 .375rem;
 }
 
 nav a {
@@ -31,14 +31,28 @@ footer a {
 h1 {
     color: royalblue;
     margin-bottom: 1.5rem;
+    font-weight: bold;
 }
+
 
 h3 {
     color: royalblue;
 }
 
+h4 {
+    color: black;
+}
+
 p {
     color: royalblue;
+}
+
+.flash-message {
+    background-color: royalblue;
+    color: #212529;
+    font-size: larger;
+    font-weight: bolder;
+    text-align: center;
 }
 
 .btn-color {
@@ -113,6 +127,10 @@ tr.odd {
         display: none;
     }
 
+    h4{
+    font-size: 1rem;
+    }
+
     .tables {
         border: solid .35rem black;
         width: 95%;
@@ -149,7 +167,6 @@ tr.odd {
     #total-cash-td {
         padding-right: 1.9rem;
     }
-
 
     .stocks-thead {
         font-size: .9rem;

@@ -3,4 +3,4 @@ sell.py
 __pycache__/*
 finance/__pycache__/*
 migrations/*
-index.html
+credentials.json

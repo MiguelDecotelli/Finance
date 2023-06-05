@@ -5,8 +5,8 @@ History
 {% endblock %}
 
 {% block main %}
-
 <h1>History</h1>
+{% if transactions %}
 <div class="container tables">
     <table class="table table-striped">
         <thead class="history-thead">
@@ -31,4 +31,9 @@ History
         </tbody>
     </table>
 </div>
+{% else %}
+<div>
+    <h4>No transactions yet.</h4>
+</div>
+{% endif %}
 {% endblock %}

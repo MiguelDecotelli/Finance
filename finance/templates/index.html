@@ -6,6 +6,7 @@ Portfolio
 
 {% block main %}
 <h1>Portfolio</h1>
+{% if portfolio %}
 <div class="container tables">
     <table class="table table-striped">
         <thead class="portfolio-thead">
@@ -39,6 +40,11 @@ Portfolio
             </tr>
         </tfoot>
     </table>
+    {% else %}
+    <div>
+        <h4>You don't have any shares yet. Try to buy some.</h4>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}
