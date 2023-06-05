@@ -3,4 +3,5 @@ Flask-Session
 Flask-Login
 Flask-Migrate
 gunicorn
+psycopg2-binary
 requests
