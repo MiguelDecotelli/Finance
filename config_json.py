@@ -8,5 +8,4 @@ PASSWORD = config.get("PASSWORD")
 HOST = config.get("HOST")
 DATABASE = config.get("DATABASE")
 PORT =  21689
-API_KEY =  config.get("API_KEY")
 SECRET_KEY =  config.get("SECRET_KEY")

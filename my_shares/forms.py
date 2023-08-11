@@ -42,7 +42,7 @@ class SellForm(FlaskForm):
 
 
 class StockListForm(FlaskForm):
-    symbol_search = StringField('Symbol Search', render_kw={"placeholder":"Company's Name", "autocomplete": False, "autofocus": True})
+    symbol_search = StringField('Symbol Search', render_kw={"placeholder":"Type the Company's Name", "autocomplete": False, "autofocus": True})
     submit = SubmitField('Search')
 
 class CashForm(FlaskForm):

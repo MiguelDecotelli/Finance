@@ -1,6 +1,5 @@
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_user, login_required, logout_user
-from config_json import API_KEY
 from sqlalchemy import func
 from my_shares import app, db
 from my_shares.credit_card import check_credit_card
@@ -12,9 +11,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 app.jinja_env.filters["usd"] = usd
-
-if not API_KEY:
-    raise RuntimeError("API_KEY not set")
 
 
 @app.after_request
@@ -188,14 +184,17 @@ def index():
         .order_by(Portfolio.symbol)
         .all()
     )
-
+    print(my_portfolio)
     # Creating an empty list to store updated share information
     portfolio = []
 
     # Updating prices and calculating totals for each share
     for share in my_portfolio:
+        print(share)
 
         share_info = lookup(share.symbol)
+        print(share.name)
+        print(f"Info: {share_info}")
         if share_info is not None:
             current_price = lookup(share.symbol)["price"]
             total = current_price * int(share.shares)
@@ -216,6 +215,7 @@ def index():
 
     cash = current_user.cash
     total_cash = cash + sum(entry["total"] for entry in portfolio)
+    print(portfolio)
 
     return render_template("index.html", portfolio=portfolio, cash=cash, total_cash=total_cash)
 
