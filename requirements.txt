@@ -10,6 +10,8 @@ itsdangerous
 gunicorn
 Jinja2
 psycopg2-binary
+pytz
+uuid
 SQLAlchemy
 SQLAlchemy-Utils
 requests
